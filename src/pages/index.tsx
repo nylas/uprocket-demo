@@ -1,3 +1,4 @@
+import Dashboard from '@/components/dashboard'
 import { LandingPage } from '@/components/landing-page'
 import { useLoggedInUser } from '@/lib/hooks'
 import Head from 'next/head'
@@ -18,7 +19,7 @@ export default function Home() {
         />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <LandingPage />
+      {user ? <Dashboard user={user} /> : <LandingPage />}
     </>
   )
 }
