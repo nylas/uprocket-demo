@@ -1,11 +1,21 @@
 import moment from "moment-timezone";
 export const NYLAS_AUTH_CONFIG = {
-    storageType: "indexeddb",
-    apiUri: process.env.NEXT_PUBLIC_NYLAS_API_URI,
-    elementsApiUri: process.env.NEXT_PUBLIC_NYLAS_ELEMENTS_API_URI,
-    clientId: process.env.NEXT_PUBLIC_NYLAS_CLIENT_ID,
-    defaultScopes: ["https://www.googleapis.com/auth/calendar"],
-  };
+  storageType: "indexeddb",
+  apiUri: process.env.NEXT_PUBLIC_NYLAS_API_URI,
+  elementsApiUri: process.env.NEXT_PUBLIC_NYLAS_ELEMENTS_API_URI,
+  clientId: process.env.NEXT_PUBLIC_NYLAS_CLIENT_ID,
+  defaultScopes: ["https://www.googleapis.com/auth/calendar"],
+};
+export const FIREBASE_CONFIG = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+}
+export const FIREBASE_ADMIN_DATABASE_URL = process.env.FIREBASE_ADMIN_DATABASE_URL;
 export const TIMEZONES: {
   [key: string]: string;
 } = (() => {
