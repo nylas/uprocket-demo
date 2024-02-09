@@ -18,12 +18,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 2. Install the dependencies
     ```bash
     npm install
-    # or
-    yarn
-    # or
-    pnpm
-    # or
-    bun
     ```
 3. Copy the `.env-sample` file to `.env.local` and update the values with your Nylas App ID and Secret.
     ```bash
@@ -32,11 +26,5 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 4. Start the development server
     ```bash
     npm run dev
-    # or
-    yarn dev
-    # or
-    pnpm dev
-    # or
-    bun dev
     ```
 5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
