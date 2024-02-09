@@ -5,8 +5,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 # What's Inside
 - How the [Nylas React](./package.json#L14) package can be installed in your application.
 - How to [import components](./src/components/see-more-times.tsx#L3) in your application's frontend.
-- How to [embed](./src/components/see-more-times.tsx#L107-L125) and configure the components.
-- How to [generate and fetch](./src/pages/api/session.ts#L26) a session ID from the Nylas API's and use it to authenticate the components.
+- How to [embed](./src/components/see-more-times.tsx#L103-L121) and configure the components.
+- How to [generate and fetch](./src/pages/api/session.ts#L28) a session ID from the Nylas API's and use it to authenticate the components.
 
 ## Getting Started
 
