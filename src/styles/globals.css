@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /**
 * Customers have to manually add this css to prevent a flash of unstyled content (FOUC)
 * when using the nylas-if-state, nylas-provider and any other provider elements.

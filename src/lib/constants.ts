@@ -1,13 +1,19 @@
 import moment from "moment-timezone";
 export const NYLAS_AUTH_CONFIG = {
   storageType: "indexeddb",
-  apiUri: process.env.NEXT_PUBLIC_NYLAS_API_URI || "https://api-staging.nylas.com",
-  elementsApiUri: process.env.NEXT_PUBLIC_NYLAS_ELEMENTS_API_URI  || "https://elements-staging.us.nylas.com",
+  apiUri:
+    process.env.NEXT_PUBLIC_NYLAS_API_URI || "https://api-staging.nylas.com",
+  elementsApiUri:
+    process.env.NEXT_PUBLIC_NYLAS_ELEMENTS_API_URI ||
+    "https://elements-staging.us.nylas.com",
   clientId: process.env.NEXT_PUBLIC_NYLAS_CLIENT_ID || "nylas-client-id",
   defaultScopes: ["https://www.googleapis.com/auth/calendar"],
 };
-export const NYLAS_API_URL = process.env.NEXT_PUBLIC_NYLAS_API_URI || "https://api-staging.us.nylas.com";
-export const NYLAS_SCHEDULER_API_URL = process.env.NEXT_PUBLIC_NYLAS_SCHEDULER_API_URL || "https://elements-staging.us.nylas.com";
+export const NYLAS_API_URL =
+  process.env.NEXT_PUBLIC_NYLAS_API_URI || "https://api-staging.us.nylas.com";
+export const NYLAS_SCHEDULER_API_URL =
+  process.env.NEXT_PUBLIC_NYLAS_SCHEDULER_API_URL ||
+  "https://elements-staging.us.nylas.com";
 export const FIREBASE_CONFIG = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -16,8 +22,9 @@ export const FIREBASE_CONFIG = {
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-}
-export const FIREBASE_ADMIN_DATABASE_URL = process.env.FIREBASE_ADMIN_DATABASE_URL;
+};
+export const FIREBASE_ADMIN_DATABASE_URL =
+  process.env.FIREBASE_ADMIN_DATABASE_URL;
 export const TIMEZONES: {
   [key: string]: string;
 } = (() => {

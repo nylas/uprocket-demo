@@ -1,8 +1,8 @@
-import { type ClassValue, clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 // A function that takes a start date  and end date
@@ -21,7 +21,6 @@ export function formatDuration(start: Date, end: Date) {
     minute: "numeric",
   }).format(end)}`;
 }
-
 
 export function getDurationInMinutes(start: Date, end: Date) {
   return (end.getTime() - start.getTime()) / 60000;

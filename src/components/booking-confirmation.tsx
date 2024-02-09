@@ -3,163 +3,184 @@
  * @see https://v0.dev/t/aS4rtoTnt8X
  */
 
-import { useConfirmedBookingDetails, useConfirmedTimeslot, useLoggedInUser } from '@/lib/hooks'
-import { Header } from './header'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import {
+  useConfirmedBookingDetails,
+  useConfirmedTimeslot,
+  useLoggedInUser,
+} from "@/lib/hooks";
+import { Header } from "./header";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export function BookingConfirmation() {
-  const { confirmedBookingDetails } = useConfirmedBookingDetails()
-  const { confirmedTimeslot } = useConfirmedTimeslot()
-  const [owner, setOwner] = useState<{ name: string; email: string } | null>(null)
-  const [participants, setParticipants] = useState<{ name: string; email: string }[] | null>(null)
-  const [startTime, setStartTime] = useState<string | null>(null)
-  const [endTime, setEndTime] = useState<string | null>(null)
-  const { user } = useLoggedInUser()
+  const { confirmedBookingDetails } = useConfirmedBookingDetails();
+  const { confirmedTimeslot } = useConfirmedTimeslot();
+  const [owner, setOwner] = useState<{ name: string; email: string } | null>(
+    null
+  );
+  const [participants, setParticipants] = useState<
+    { name: string; email: string }[] | null
+  >(null);
+  const [startTime, setStartTime] = useState<string | null>(null);
+  const [endTime, setEndTime] = useState<string | null>(null);
+  const { user } = useLoggedInUser();
 
   useEffect(() => {
     if (confirmedBookingDetails) {
-      const owner = confirmedBookingDetails.config.data.event_booking.organizer
-      setOwner(owner)
-      const participants = confirmedBookingDetails.booking_data.participants
-      setParticipants(participants)
+      const owner = confirmedBookingDetails.config.data.event_booking.organizer;
+      setOwner(owner);
+      const participants = confirmedBookingDetails.booking_data.participants;
+      setParticipants(participants);
     }
-  }, [confirmedBookingDetails])
+  }, [confirmedBookingDetails]);
 
   useEffect(() => {
     if (confirmedTimeslot && confirmedTimeslot.timeslot) {
-      const startTime = confirmedTimeslot.timeslot.start_time.toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true,
-      })
-      const endTime = confirmedTimeslot.timeslot.end_time.toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true,
-      })
+      const startTime =
+        confirmedTimeslot.timeslot.start_time.toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "numeric",
+          hour12: true,
+        });
+      const endTime = confirmedTimeslot.timeslot.end_time.toLocaleTimeString(
+        "en-US",
+        {
+          hour: "numeric",
+          minute: "numeric",
+          hour12: true,
+        }
+      );
 
-      setStartTime(startTime)
-      setEndTime(endTime)
+      setStartTime(startTime);
+      setEndTime(endTime);
     }
-  }, [confirmedTimeslot])
+  }, [confirmedTimeslot]);
 
   return (
-    <div className='flex flex-col min-h-screen bg-white'>
+    <div className="flex flex-col min-h-screen bg-white">
       <Header />
-      <div className='items-center'>
-        <Link href='/contractors' className='text-apple-600 hover:underline block mb-6'>
+      <div className="items-center">
+        <Link
+          href="/contractors"
+          className="text-apple-600 hover:underline block mb-6"
+        >
           ← Back to contractors
         </Link>
-        <div className='max-w-sm mx-auto mt-10 p-6 bg-white rounded-lg shadow-md'>
-          <div className='flex justify-center'>
-            <CalendarIcon className='text-gray-500' />
+        <div className="max-w-sm mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+          <div className="flex justify-center">
+            <CalendarIcon className="text-gray-500" />
           </div>
-          <h2 className='mt-4 text-center text-2xl font-bold'>Booking confirmed!</h2>
-          <div className='mt-6'>
-            <div className='flex items-center'>
-              <CheckCircleIcon className='text-green-500' />
-              <h3 className='ml-2 font-semibold'>Booking date and time</h3>
+          <h2 className="mt-4 text-center text-2xl font-bold">
+            Booking confirmed!
+          </h2>
+          <div className="mt-6">
+            <div className="flex items-center">
+              <CheckCircleIcon className="text-green-500" />
+              <h3 className="ml-2 font-semibold">Booking date and time</h3>
             </div>
-            <p className='ml-8 text-gray-700'>
-              {confirmedTimeslot?.timeslot.start_time.toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
+            <p className="ml-8 text-gray-700">
+              {confirmedTimeslot?.timeslot.start_time.toLocaleDateString(
+                "en-US",
+                {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                }
+              )}
             </p>
-            <p className='ml-8 text-gray-700'>
+            <p className="ml-8 text-gray-700">
               {startTime} - {endTime}
             </p>
           </div>
-          <div className='mt-4'>
-            <div className='flex items-center'>
-              <GroupIcon className='text-gray-500' />
-              <h3 className='ml-2 font-semibold'>All participants</h3>
+          <div className="mt-4">
+            <div className="flex items-center">
+              <GroupIcon className="text-gray-500" />
+              <h3 className="ml-2 font-semibold">All participants</h3>
             </div>
-            <p className='ml-8 text-gray-700'>{owner?.email} (organizer)</p>
+            <p className="ml-8 text-gray-700">{owner?.email} (organizer)</p>
             {participants?.map((participant) => {
               return (
-                <p className='ml-8 text-gray-700' key={participant.email}>
-                  <span className='block'>
-                    {participant.email}{' '}
-                    {participant.name == user?.name || participant.email == user?.email
-                      ? '(You)'
-                      : ''}
+                <p className="ml-8 text-gray-700" key={participant.email}>
+                  <span className="block">
+                    {participant.email}{" "}
+                    {participant.name == user?.name ||
+                    participant.email == user?.email
+                      ? "(You)"
+                      : ""}
                   </span>
                 </p>
-              )
+              );
             })}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function CalendarIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
-      xmlns='http://www.w3.org/2000/svg'
-      width='24'
-      height='24'
-      viewBox='0 24'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth='2'
-      strokeLinecap='round'
-      strokeLinejoin='round'
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
-      <rect width='18' height='18' x='3' y='4' rx='2' ry='2' />
-      <line x1='16' x2='16' y1='2' y2='6' />
-      <line x1='8' x2='8' y1='2' y2='6' />
-      <line x1='3' x2='21' y1='10' y2='10' />
+      <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+      <line x1="16" x2="16" y1="2" y2="6" />
+      <line x1="8" x2="8" y1="2" y2="6" />
+      <line x1="3" x2="21" y1="10" y2="10" />
     </svg>
-  )
+  );
 }
 
 function CheckCircleIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
-      xmlns='http://www.w3.org/2000/svg'
-      width='24'
-      height='24'
-      viewBox='0 24'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth='2'
-      strokeLinecap='round'
-      strokeLinejoin='round'
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
-      <path d='M22 11.08V12a10 10 0 1 1-5.93-9.14' />
-      <polyline points='22 4 12 14.01 9 11.01' />
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+      <polyline points="22 4 12 14.01 9 11.01" />
     </svg>
-  )
+  );
 }
 
 function GroupIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
-      xmlns='http://www.w3.org/2000/svg'
-      width='24'
-      height='24'
-      viewBox='0 24'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth='2'
-      strokeLinecap='round'
-      strokeLinejoin='round'
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
-      <path d='M3 7V5c0-1.1.9-2 2-2h2' />
-      <path d='M17 3h2c1.1 0 2 .9 2v2' />
-      <path d='M21 17v2c0 1.1-.9 2-2 2h-2' />
-      <path d='M7 21H5c-1.1 0-2-.9-2-2v-2' />
-      <rect width='7' height='5' x='7' y='7' rx='1' />
-      <rect width='7' height='5' x='10' y='12' rx='1' />
+      <path d="M3 7V5c0-1.1.9-2 2-2h2" />
+      <path d="M17 3h2c1.1 0 2 .9 2v2" />
+      <path d="M21 17v2c0 1.1-.9 2-2 2h-2" />
+      <path d="M7 21H5c-1.1 0-2-.9-2-2v-2" />
+      <rect width="7" height="5" x="7" y="7" rx="1" />
+      <rect width="7" height="5" x="10" y="12" rx="1" />
     </svg>
-  )
+  );
 }

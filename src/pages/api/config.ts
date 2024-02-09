@@ -128,18 +128,18 @@ async function setConfig(
       },
     };
 
-    const { data: data_30, status: status_30 } =  await createOrUpdateConfig(
+    const { data: data_30, status: status_30 } = await createOrUpdateConfig(
       config,
       30,
       grant_id,
-      config_id,
+      config_id
     );
 
     const { data: data_60, status: status_60 } = await createOrUpdateConfig(
       config,
       60,
       grant_id,
-      config_id_60,
+      config_id_60
     );
 
     // Update the user
@@ -167,7 +167,7 @@ async function createOrUpdateConfig(
   config: any,
   duration: number,
   grant_id: string,
-  config_id?: string,
+  config_id?: string
 ) {
   config["availability"]["duration_minutes"] = duration;
   if (!config_id) {
@@ -190,7 +190,7 @@ async function createOrUpdateConfig(
       return {
         status: 500,
         data: responseData,
-      }
+      };
     }
 
     if ("data" in responseData) {
@@ -204,7 +204,7 @@ async function createOrUpdateConfig(
     return {
       status: 500,
       data: "Unknown error",
-    }
+    };
   } else {
     const configResponse = await fetch(
       `${NYLAS_SCHEDULER_API_URL}/v3/grants/${grant_id}/scheduling/configuration/${config_id}`,
@@ -225,7 +225,7 @@ async function createOrUpdateConfig(
       return {
         status: 500,
         data: responseData,
-      }
+      };
     }
 
     if ("data" in responseData) {
@@ -239,6 +239,6 @@ async function createOrUpdateConfig(
     return {
       status: 500,
       data: "Unknown error",
-    }
+    };
   }
 }

@@ -147,8 +147,9 @@ export default function ContractorPage() {
                 </CardContent>
                 <CardFooter>
                   <p className="text-sm text-gray-600">
-                    You&apos;re covered with payment protection so you can cancel and
-                    get a full refund up to 24 hours before your consultation.
+                    You&apos;re covered with payment protection so you can
+                    cancel and get a full refund up to 24 hours before your
+                    consultation.
                   </p>
                 </CardFooter>
               </Card>
