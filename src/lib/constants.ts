@@ -6,6 +6,8 @@ export const NYLAS_AUTH_CONFIG = {
   clientId: process.env.NEXT_PUBLIC_NYLAS_CLIENT_ID || "nylas-client-id",
   defaultScopes: ["https://www.googleapis.com/auth/calendar"],
 };
+export const NYLAS_API_URL = process.env.NEXT_PUBLIC_NYLAS_API_URI || "https://api-staging.us.nylas.com";
+export const NYLAS_SCHEDULER_API_URL = process.env.NEXT_PUBLIC_NYLAS_SCHEDULER_API_URL || "https://elements-staging.us.nylas.com";
 export const FIREBASE_CONFIG = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -40,7 +42,6 @@ export const DURATIONS_AND_PRICES = [
     price: 10,
   },
 ];
-export const NYLAS_SCHEDULER_API_URL = "https://elements-staging.us.nylas.com";
 export const BRAND_COLOR = "hsl(140, 75%, 50%)";
 export const AUTH_COOKIE_NAME = "uprocket-demo-app";
 export const SESSION_TIME_TO_LIVE = 5;

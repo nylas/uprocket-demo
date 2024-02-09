@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { getUserData } from '@/db/users'
-import { NYLAS_SCHEDULER_API_URL } from '@/lib/constants'
+import { NYLAS_API_URL } from '@/lib/constants'
 import { validateRequest } from '@/lib/request'
 import { UserData } from '@/lib/types'
 import type { NextApiRequest, NextApiResponse } from 'next'
@@ -38,7 +38,7 @@ async function getCalendars(user: UserData, _request: NextApiRequest, response: 
 
   // Get the config from the database.-
   const configResponse = await fetch(
-    `${NYLAS_SCHEDULER_API_URL}/v3/grants/${grant_id}/calendars`,
+    `${NYLAS_API_URL}/v3/grants/${grant_id}/calendars`,
     {
       method: 'GET',
       headers: {
