@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Uprocket Demo
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). It demonstrates the use of the new Scheduler v3 components and Scheduling API to create a simple web application that allows users to schedule a meeting with a contractor.
+
+NOTE: This is a demo project and is not intended for production use.
 
 ## Getting Started
 
