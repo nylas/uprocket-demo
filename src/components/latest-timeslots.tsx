@@ -117,6 +117,7 @@ export default function LatestTimeslots({
   useEffect(() => {
     if (contractor) {
       setSessionId(null);
+      setTimeslots(null);
     }
   }, [selectedDurationInMinutes, contractor]);
 
