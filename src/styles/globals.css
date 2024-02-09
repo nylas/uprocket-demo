@@ -1,3 +1,75 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/**
+* Customers have to manually add this css to prevent a flash of unstyled content (FOUC)
+* when using the nylas-if-state, nylas-provider and any other provider elements.
+* This is because the nylas-if-state and nylas-provider slot content is already
+* in the DOM before the elements are hydrated. So any javascript that might hide the
+* content will not be executed until after the elements are hydrated.
+*/
+nylas-if-state {
+  visibility: hidden;
+}
+
+nylas-if-state.hydrated {
+  visibility: inherit;
+}
+
+nylas-provider {
+  visibility: hidden;
+}
+
+nylas-provider.hydrated {
+  visibility: inherit;
+}
+
+nylas-scheduler {
+  visibility: hidden;
+}
+
+nylas-scheduler.hydrated {
+  visibility: inherit;
+}
+
+nylas-scheduler-additional-data.hydrated {
+  visibility: inherit;
+}
+
+nylas-scheduler-additional-data {
+  height: inherit;
+}
+
+nylas-selected-event-card.hydrated {
+  visibility: inherit;
+}
+
+nylas-selected-event-card {
+  height: inherit;
+}
+
+nylas-open-hours-picker {
+  font-size: 14px;
+  --nylas-grid-border-color: var(--color-slate-300);
+  --nylas-available-color: var(--color-apple-600);
+  --nylas-unavailable-color: var(--color-slate-100);
+}
+
+nylas-login::part(button) {
+  background-color: var(--color-apple-800);
+  color: var(--color-white);
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  border: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+#nylas-scheduler-provider {
+  box-shadow: none;
+  display: block;
+}
