@@ -2,9 +2,9 @@ import moment from "moment-timezone";
 export const NYLAS_AUTH_CONFIG = {
   storageType: "indexeddb",
   apiUri:
-    process.env.NEXT_PUBLIC_NYLAS_API_URI || "https://api-staging.nylas.com",
+    process.env.NEXT_PUBLIC_NYLAS_API_URL || "https://api-staging.nylas.com",
   elementsApiUri:
-    process.env.NEXT_PUBLIC_NYLAS_ELEMENTS_API_URI ||
+    process.env.NEXT_PUBLIC_NYLAS_ELEMENTS_API_URL ||
     "https://elements-staging.us.nylas.com",
   clientId: process.env.NEXT_PUBLIC_NYLAS_CLIENT_ID || "nylas-client-id",
   defaultScopes: ["https://www.googleapis.com/auth/calendar"],
