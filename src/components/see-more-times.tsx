@@ -79,7 +79,7 @@ export default function SeeMoreTimes({
         setSessionId(sessionId);
       });
     }
-  }, [selectedDurationInMinutes]);
+  }, [createSession, sessionId, selectedDurationInMinutes]);
 
   /**
    * Update bookingInfo when user changes
@@ -91,7 +91,7 @@ export default function SeeMoreTimes({
         email: user?.email,
       },
     });
-  }, [user]);
+  }, [user, setBookingInfo]);
 
   return (
     <Dialog open={showScheduler} onOpenChange={() => setShowScheduler(false)}>

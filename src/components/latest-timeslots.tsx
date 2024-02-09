@@ -112,7 +112,7 @@ export default function LatestTimeslots({
         setSessionId(sessionId);
       });
     }
-  }, [selectedDurationInMinutes]);
+  }, [selectedDurationInMinutes, createSession, sessionId]);
 
   /**
    * When the session ID is available, we will use the NylasSchedulerConnector
@@ -148,7 +148,7 @@ export default function LatestTimeslots({
     if (sessionId) {
       updateFirstThreeTimeslots();
     }
-  }, [sessionId]);
+  }, [sessionId, schedulerRef]);
 
   // If no session ID is available, we'll render a skeleton loading state of 3 timeslots
   if (!sessionId) {

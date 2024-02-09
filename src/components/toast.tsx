@@ -45,6 +45,10 @@ interface ToastProviderProps {
 export const ToastProvider: FC<ToastProviderProps> = ({ children }) => {
   const [toasts, setToasts] = useState<Toast[]>([])
 
+  const removeToast = useCallback((id: number) => {
+    setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id))
+  }, [])
+
   const addToast = useCallback(
     (title: string, content: string, type: ToastType, duration: number = 5000) => {
       const id = Math.random()
@@ -54,12 +58,8 @@ export const ToastProvider: FC<ToastProviderProps> = ({ children }) => {
         setTimeout(() => removeToast(id), duration)
       }
     },
-    [],
+    [removeToast],
   )
-
-  const removeToast = useCallback((id: number) => {
-    setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id))
-  }, [])
 
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>

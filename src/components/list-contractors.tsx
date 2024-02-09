@@ -22,7 +22,7 @@ export function ListContractors() {
             <div className='flex flex-col items-center justify-center w-full'>
               <h3 className='text-2xl font-semibold text-gray-600'>No contractors found</h3>
               <p className='text-gray-500'>
-                We couldn't find any contractors matching your search.
+                We couldn&apos;t find any contractors matching your search.
               </p>
             </div>
           </div>

@@ -57,12 +57,6 @@ export function PaymentCheckout() {
   const [city, setCity] = useState('')
   const [postalCode, setPostalCode] = useState('')
 
-  // Redirect to home if no timeslot is confirmed
-  if (!confirmedTimeslot) {
-    router.push('/')
-    return null
-  }
-
   // Validation function
   const validateForm = () => {
     if (
@@ -146,7 +140,13 @@ export function PaymentCheckout() {
       setDuration(duration);
       setPrice(DURATIONS_AND_PRICES.find((d) => d.duration === duration)?.price || 5);
     }
-  });
+  }, [preBookedEventDetails]);
+
+  // Redirect to home if no timeslot is confirmed
+  if (!confirmedTimeslot) {
+    router.push('/')
+    return null
+  }
 
   return (
     <div className='max-w-7xl mx-auto my-8 p-4'>

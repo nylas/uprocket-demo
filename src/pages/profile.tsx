@@ -274,7 +274,7 @@ export default function Profile() {
                     Job information
                   </h2>
                   <p className='mt-1 text-sm leading-6 text-gray-600'>
-                    Add details for the type of work you're looking for.
+                    Add details for the type of work you&apos;re looking for.
                   </p>
                 </div>
 

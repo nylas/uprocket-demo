@@ -1,5 +1,5 @@
 import { getUserByUid } from '@/db/users'
-import { SESSION_TIME_TO_LIVE } from '@/lib/constants'
+import { NYLAS_SCHEDULER_API_URL, SESSION_TIME_TO_LIVE } from '@/lib/constants'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { z } from 'zod'
 
@@ -58,7 +58,7 @@ async function createSession(request: NextApiRequest, response: NextApiResponse<
     const configID = duration == 30 ? user.config_id : user.config_id_60
 
     const sessionResponse = await fetch(
-      `https://elements-staging.us.nylas.com/v3/grants/${user.grant_id}/scheduling/session_token`,
+      `${NYLAS_SCHEDULER_API_URL}/v3/grants/${user.grant_id}/scheduling/session_token`,
       {
         method: 'POST',
         headers: {

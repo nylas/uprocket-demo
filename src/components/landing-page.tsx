@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 import { Header } from './header'
 import { Footer } from './footer'
+import Image from 'next/image'
 
 export function LandingPage() {
   return (
@@ -40,7 +41,7 @@ export function LandingPage() {
         <section className='w-full py-12 md:py-24 lg:py-32 bg-apple-50'>
           <div className='container px-4 md:px-6  mx-auto'>
             <div className='grid items-center gap-6 lg:grid-cols-[1fr_500px] lg:gap-12 xl:grid-cols-[1fr_550px]'>
-              <img
+              <Image
                 alt='Contractors'
                 className='mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last'
                 height='310'
@@ -86,8 +87,8 @@ export function LandingPage() {
               <Card>
                 <CardContent>
                   <p className='text-sm leading-snug text-gray-500'>
-                    "The freelancer I hired was professional and delivered the project on time. I
-                    would definitely use UpRocket again."
+                    &quot;The freelancer I hired was professional and delivered the project on time. I
+                    would definitely use UpRocket again.&quot;
                   </p>
                   <div className='mt-4 text-sm font-medium text-apple-900'>- John Doe, CEO</div>
                 </CardContent>
@@ -95,8 +96,8 @@ export function LandingPage() {
               <Card>
                 <CardContent>
                   <p className='text-sm leading-snug text-gray-500'>
-                    "UpRocket made it easy to find a freelancer with the skills I needed. The
-                    project was a success!"
+                    &quot;UpRocket made it easy to find a freelancer with the skills I needed. The
+                    project was a success!&quot;
                   </p>
                   <div className='mt-4 text-sm font-medium text-apple-900'>
                     - Jane Smith, Project Manager
@@ -106,8 +107,8 @@ export function LandingPage() {
               <Card>
                 <CardContent>
                   <p className='text-sm leading-snug text-gray-500'>
-                    "I was impressed with the quality of work from the freelancer I hired on
-                    UpRocket. Highly recommended!"
+                    &quot;I was impressed with the quality of work from the freelancer I hired on
+                    UpRocket. Highly recommended!&quot;
                   </p>
                   <div className='mt-4 text-sm font-medium text-apple-900'>
                     - Sarah Johnson, Designer
