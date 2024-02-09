@@ -1,4 +1,4 @@
-import { firebaseAdminDb } from '@/lib/firebase-admin'
+import { firebaseFirestoneDb } from '@/lib/firebase-admin'
 import { TransformedUserData, UserData } from '@/lib/types'
 import { DecodedIdToken } from 'firebase-admin/auth'
 
@@ -11,13 +11,13 @@ export async function updateUser(idToken: DecodedIdToken, userData: UserData): P
     transformedUserData.skills = ''
   }
 
-  await firebaseAdminDb.ref(`uprocket/user/${idToken.uid}`).set(transformedUserData)
+  await firebaseFirestoneDb.doc(`uprocket/${idToken.uid}`).set(transformedUserData)
   return true
 }
 
 export async function getUserData(idToken: DecodedIdToken): Promise<UserData | false> {
-  const snapshot = await firebaseAdminDb.ref(`uprocket/user/${idToken.uid}`).get()
-  const transformedUserData: TransformedUserData | null = snapshot.val()
+  const uprocketUserDoc = await firebaseFirestoneDb.doc(`uprocket/${idToken.uid}`).get()
+  const transformedUserData: TransformedUserData | undefined = uprocketUserDoc.data() as TransformedUserData | undefined
 
   if (!transformedUserData) {
     return false
@@ -35,8 +35,8 @@ export async function getUserData(idToken: DecodedIdToken): Promise<UserData | f
 }
 
 export async function getUserByUid(uid: string): Promise<UserData | null> {
-  const snapshot = await firebaseAdminDb.ref(`uprocket/user/${uid}`).get()
-  const transformedUserData: TransformedUserData | null = snapshot.val()
+  const uprocketUserDoc = await firebaseFirestoneDb.doc(`uprocket/${uid}`).get()
+  const transformedUserData: TransformedUserData | undefined = uprocketUserDoc.data() as TransformedUserData | undefined
 
   if (!transformedUserData) {
     return null
@@ -54,19 +54,22 @@ export async function getUserByUid(uid: string): Promise<UserData | null> {
 }
 
 export async function getUsers(): Promise<UserData[]> {
-  const snapshot = await firebaseAdminDb.ref(`uprocket`).child('user').get()
-  const users: Record<string, TransformedUserData> | null = snapshot.val()
+  const uprocketUsers = await firebaseFirestoneDb.collection(`uprocket`).get()
+  const transformedUsers: Record<string, TransformedUserData> | null = {};
+  uprocketUsers.forEach((doc) => {
+    transformedUsers[doc.id] = doc.data() as TransformedUserData
+  })
 
-  if (!users) {
+  if (!transformedUsers) {
     return []
   }
 
   // Convert object to array.-
-  const usersArray: UserData[] = Object.keys(users).map((key) => {
+  const usersArray: UserData[] = Object.keys(transformedUsers).map((key) => {
     // Transform userData so that 'skills' is an array instead of a string.-
-    const userData: UserData = { ...users[key], skills: [] }
-    if (users[key].skills) {
-      userData.skills = users[key].skills.split(',')
+    const userData: UserData = { ...transformedUsers[key], skills: [] }
+    if (transformedUsers[key].skills) {
+      userData.skills = transformedUsers[key].skills.split(',')
     } else {
       userData.skills = []
     }

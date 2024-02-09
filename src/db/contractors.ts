@@ -1,14 +1,12 @@
-import { firebaseAdminDb } from '@/lib/firebase-admin'
-import { Contractor, TransformedUserData } from '@/lib/types'
+import { firebaseFirestoneDb } from '@/lib/firebase-admin';
+import { Contractor, TransformedUserData } from '@/lib/types';
 
 export async function getContractors(): Promise<Contractor[]> {
-  const snapshot = await firebaseAdminDb
-    .ref(`uprocket`)
-    .child('user')
-    .orderByChild('looking_for_work')
-    .equalTo(true)
-    .get()
-  const users: Record<string, TransformedUserData> | null = snapshot.val()
+  const uprocketUsers = await firebaseFirestoneDb.collection(`uprocket`).get()
+  const users: Record<string, TransformedUserData> | null = {};
+  uprocketUsers.forEach((doc) => {
+    users[doc.id] = doc.data() as TransformedUserData
+  })
 
   if (!users) {
     return []
@@ -37,8 +35,8 @@ export async function getContractors(): Promise<Contractor[]> {
 }
 
 export async function getContractorByUid(uid: string): Promise<Contractor | null> {
-  const snapshot = await firebaseAdminDb.ref(`uprocket/user/${uid}`).get()
-  const transformedUserData: TransformedUserData | null = snapshot.val()
+  const uprocketUserDoc = await firebaseFirestoneDb.doc(`uprocket/${uid}`).get()
+  const transformedUserData: TransformedUserData | undefined = uprocketUserDoc.data() as TransformedUserData | undefined
 
   if (!transformedUserData) {
     return null

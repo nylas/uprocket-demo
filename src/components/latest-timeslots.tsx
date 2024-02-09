@@ -35,6 +35,8 @@ export default function LatestTimeslots({
   setSelectedTimeslot,
   schedulerRef,
 }: SeeMoreTimesProps) {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [fetchingTimeslots, setFetchingTimeslots] = useState<boolean>(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [timeSlots, setTimeslots] = useState<
     { emails: string[]; start_time: number; end_time: number }[] | null
@@ -94,25 +96,29 @@ export default function LatestTimeslots({
    * Create a session to pass prop sessionId to NylasScheduler
    */
   useEffect(() => {
+    // If already initialized, return
+    if (loading) {
+      return;
+    }
+
     // Create a session to pass prop sessionId to NylasScheduler
-    if (!sessionId) {
+    if (!sessionId && contractor) {
+      setLoading(true);
       createSession().then((sessionId) => {
         setSessionId(sessionId);
+        setLoading(false);
       });
     }
-  }, [contractor, sessionId, createSession]);
+  }, [contractor, createSession, sessionId, loading]);
 
   /**
    * If selectedDurationInMinutes changes, we will recreate the session
    */
   useEffect(() => {
-    if (sessionId) {
+    if (contractor) {
       setSessionId(null);
-      createSession().then((sessionId) => {
-        setSessionId(sessionId);
-      });
     }
-  }, [selectedDurationInMinutes, createSession, sessionId]);
+  }, [selectedDurationInMinutes, contractor]);
 
   /**
    * When the session ID is available, we will use the NylasSchedulerConnector
@@ -121,6 +127,16 @@ export default function LatestTimeslots({
    * in the state.
    */
   useEffect(() => {
+    // If no session ID is available, we'll return
+    if (!sessionId) {
+      return;
+    }
+
+    // If we're already fetching timeslots, we'll return
+    if (fetchingTimeslots) {
+      return;
+    }
+
     // Using our ref to get the scheduler element.
     // With this we can access some of the methods of the scheduler like our store and connector.
     // This gives us a lot more flexibility to customize the scheduler experience to our needs.
@@ -143,16 +159,16 @@ export default function LatestTimeslots({
         );
         setTimeslots(firstThreeTimeslots);
       }
+
+      setFetchingTimeslots(false);
     };
 
-    if (sessionId) {
-      updateFirstThreeTimeslots();
-    }
-  }, [sessionId, schedulerRef]);
+    updateFirstThreeTimeslots();
+  }, [sessionId, schedulerRef, fetchingTimeslots]);
 
   // If no session ID is available, we'll render a skeleton loading state of 3 timeslots
   if (!sessionId) {
-    return;
+    return <TimeslotsSkeleton />;
   }
 
   return (

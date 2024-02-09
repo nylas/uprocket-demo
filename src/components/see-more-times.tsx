@@ -26,6 +26,7 @@ export default function SeeMoreTimes({
   setBookingInfo,
   timeslotConfirmedHandler,
 }: SeeMoreTimesProps) {
+  const [loading, setLoading] = useState<boolean>(false);
   const [showScheduler, setShowScheduler] = useState<boolean>(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const schedulerRef = useRef<HTMLNylasSchedulerElement>(null);
@@ -61,25 +62,20 @@ export default function SeeMoreTimes({
    * Create a session to pass prop sessionId to NylasScheduler
    */
   useEffect(() => {
-    // Create a session to pass prop sessionId to NylasScheduler
-    if (!sessionId) {
-      createSession().then((sessionId) => {
-        setSessionId(sessionId);
-      });
+    // If already initialized, return
+    if (loading) {
+      return;
     }
-  }, [contractor, sessionId, createSession]);
 
-  /**
-   * If selectedDurationInMinutes changes, we will recreate the session
-   */
-  useEffect(() => {
-    if (sessionId) {
-      setSessionId(null);
+    // Create a session to pass prop sessionId to NylasScheduler
+    if (!sessionId && contractor) {
+      setLoading(true);
       createSession().then((sessionId) => {
         setSessionId(sessionId);
+        setLoading(false);
       });
     }
-  }, [createSession, sessionId, selectedDurationInMinutes]);
+  }, [contractor, createSession, sessionId, loading]);
 
   /**
    * Update bookingInfo when user changes
