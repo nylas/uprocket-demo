@@ -6,6 +6,7 @@ import { useConfirmedTimeslot, usePreBookedEventDetails } from "@/lib/hooks";
 import { useRouter } from "next/router";
 import { useToast } from "./toast";
 import { Button } from "./ui/button";
+import LatestTimeslots from "./latest-timeslots";
 
 defineCustomElements();
 
@@ -24,14 +25,13 @@ export default function BookingCard({
   const { addToast } = useToast();
   const [bookingInfo, setBookingInfo] = useState<any>({});
   const [selectedTimeslot, setSelectedTimeslot] = useState<{
-    start_time: Date,
-    end_time: Date,
+    start_time: Date;
+    end_time: Date;
   } | null>(null);
   const { setConfirmedTimeslot } = useConfirmedTimeslot();
   const { setPreBookedEventDetails } = usePreBookedEventDetails();
 
   const schedulerRef = useRef<HTMLNylasSchedulerElement>(null);
-
 
   /**
    * This function is called when the user selects a timeslot.
@@ -136,14 +136,22 @@ export default function BookingCard({
   return (
     <>
       <div className="mb-4">
-        {/* Latest timeslots component goes here */}
-
+        <LatestTimeslots
+          schedulerRef={schedulerRef}
+          contractor={contractor}
+          bookingInfo={bookingInfo}
+          selectedTimeslot={selectedTimeslot}
+          setBookingInfo={setBookingInfo}
+          selectedDurationInMinutes={selectedDurationInMinutes}
+          setSelectedTimeslot={setSelectedTimeslot}
+        />
         {/* See more times component goes here */}
       </div>
 
       <p className="text-sm text-gray-600 mb-4">
         You can share details and message {contractor?.name} after checkout.
       </p>
+
       <Button
         className="w-full mb-4 hover:bg-gray-50"
         variant="outline"
