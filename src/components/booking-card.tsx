@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useToast } from "./toast";
 import { Button } from "./ui/button";
 import LatestTimeslots from "./latest-timeslots";
+import SeeMoreTimes from "./see-more-times";
 
 defineCustomElements();
 
@@ -145,7 +146,15 @@ export default function BookingCard({
           selectedDurationInMinutes={selectedDurationInMinutes}
           setSelectedTimeslot={setSelectedTimeslot}
         />
-        {/* See more times component goes here */}
+        <SeeMoreTimes
+          contractor={contractor}
+          selectedDurationInMinutes={selectedDurationInMinutes}
+          user={user}
+          timeslotConfirmedHandler={timeslotConfirmedHandler}
+          bookingInfo={bookingInfo}
+          setBookingInfo={setBookingInfo}
+          selectedTimeslot={selectedTimeslot}
+        />
       </div>
 
       <p className="text-sm text-gray-600 mb-4">
