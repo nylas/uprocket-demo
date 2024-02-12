@@ -10,10 +10,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-1. Clone the repository
-   ```bash
-    git clone git@github.com:nylas/uprocket-demo.git
-    ```
+1. [Fork](https://github.com/nylas/uprocket-demo/fork) the repository and clone it to your local machine.
 
 2. Install the dependencies
     ```bash
