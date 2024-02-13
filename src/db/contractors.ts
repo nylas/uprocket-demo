@@ -2,7 +2,7 @@ import { firebaseFirestoneDb } from "@/lib/firebase-admin";
 import { Contractor, TransformedUserData } from "@/lib/types";
 
 export async function getContractors(): Promise<Contractor[]> {
-  const uprocketUsers = await firebaseFirestoneDb.collection(`uprocket`).get();
+  const uprocketUsers = await firebaseFirestoneDb.collection(`uprocket`).where('looking_for_work', '==', true).get();
   const users: Record<string, TransformedUserData> | null = {};
   uprocketUsers.forEach((doc) => {
     users[doc.id] = doc.data() as TransformedUserData;
