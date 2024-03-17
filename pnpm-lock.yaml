@@ -1007,7 +1007,7 @@ packages:
     resolution: {integrity: sha512-M3M2/MxCcPk66zzF02IQ9053rMnKY0E7tUZo37MwOVLKUQmYjpv485zuxNhzC8BYP21MhX2mjDW4svB+wsXhNA==}
     dependencies:
       '@nylas/core': 1.0.0-prealpha1(@stencil/core@4.12.2)(karma@6.4.2)
-      '@nylas/web-elements': 1.0.0-prealpha1(karma@6.4.2)
+      '@nylas/web-elements': 1.0.2-prealpha1(karma@6.4.2)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     transitivePeerDependencies:
@@ -1015,8 +1015,8 @@ packages:
       - karma
     dev: false
 
-  /@nylas/web-elements@1.0.0-prealpha1(karma@6.4.2):
-    resolution: {integrity: sha512-1bK1/EBdTcREeLm+sSZBZgj69IK7ogXrVp9Pwkp6dkfHdASok48JqAHTi4bnJgfOwrnNiuI3KlHdW1K69M3HFg==}
+  /@nylas/web-elements@1.0.2-prealpha1(karma@6.4.2):
+    resolution: {integrity: sha512-WPB9+cIvC+2qdxk47h+CS4ID44ZHgjelsyh1+FRdDfylRzX8ZfRNprvUY7gRBOnh3YY3Xv1ZbnVHu2Z7EC8SwQ==}
     dependencies:
       '@nylas/core': 1.0.0-prealpha1(@stencil/core@4.12.2)(karma@6.4.2)
       '@spectrum-web-components/bundle': 0.39.4
@@ -4138,8 +4138,8 @@ packages:
     resolution: {integrity: sha512-Rwix9pBtC1Nuy5wysTmKy+UjbDJpIfg8eHjw0rjZ1mX4GNLz1Bmd16uDpI3Gk1i70Fgcs8Csg2lPm8HULFg9DQ==}
     dev: false
 
-  /follow-redirects@1.15.5:
-    resolution: {integrity: sha512-vSFWUON1B+yAw1VN4xMfxgn5fTUiaOzAJCKBwIIgT/+7CuGy9+r+5gITvP62j3RmaD5Ph65UaERdOSRGUzZtgw==}
+  /follow-redirects@1.15.6:
+    resolution: {integrity: sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==}
     engines: {node: '>=4.0'}
     peerDependencies:
       debug: '*'
@@ -4463,7 +4463,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.15.5
+      follow-redirects: 1.15.6
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
